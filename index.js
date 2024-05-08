@@ -8,11 +8,25 @@
 // Given Parameters
 const initialVelocityKmPerHour = 10000; // velocity (km/h)
 const accelerationMetersPerSecondSquared = 3; // acceleration (m/s^2)
-const timeSeconds = 36000; // seconds (1 hour)
+const timeSeconds = 3600; // seconds (1 hour)
 const initialDistanceKm = 0; // distance (km)
 const remainingFuelKg = 5000; // remaining fuel (kg)
 const fuelBurnRateKgPerSecond = 0.5; // fuel burn rate (kg/s)
 
+// function to calculate new velocity
+ function calculateNewVelocity(velocity, acceleration, time) {
+  if(typeof velocity !== 'number' || typeof acceleration !== 'number' || typeof time !== 'number') {
+    throw new Error('Invalid input: velocity, acceleration, and time be in numbers');
+  }
+
+  const velocityMetersPerSecond = velocity * (1000 / 3600); // 1km/h = 1000 m / 3600 s
+
+  const newVelocityMetersPerSecond = velocityMetersPerSecond + acceleration * time;
+
+  const newVelocityKmPerHour = newVelocityMetersPerSecond * (3600 / 1000);
+
+  return newVelocityKmPerHour
+ }
 
 const newDistanceKm = initialDistanceKm + (initialVelocityKmPerHour * timeSeconds) //calcultes new distance
 const remainingFuel = fuelBurnRateKgPerSecond * timeSeconds //calculates remaining fuel
